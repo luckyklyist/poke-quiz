@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PokeDetail from "./Components/PokeDetail.tsx";
+import Quiz from "./Components/QuizQuestion.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,14 @@ const router = createBrowserRouter([
   {
     path: "/detail/:id",
     element: <PokeDetail />,
+  },
+  {
+    path: "*",
+    element: <div>Not Found</div>,
+  },
+  {
+    path: "/quiz",
+    element: <Quiz />,
   },
 ]);
 
