@@ -20,7 +20,7 @@ interface PokemonDetail {
   };
 }
 
-function useGetRandomPokemonImg() {
+function useGetRandomPokemonImg(key: number) {
   const [img, setImg] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
@@ -45,7 +45,7 @@ function useGetRandomPokemonImg() {
     };
 
     fetchData();
-  }, []);
+  }, [key]);
 
   return { img, loading, error };
 }

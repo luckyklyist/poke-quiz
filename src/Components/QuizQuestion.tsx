@@ -5,11 +5,13 @@ import getRandomNumber from "../getRandomNumber";
 import { toast } from "react-toastify";
 
 function MultipleChoiceQuestion() {
+  const [key, setKey] = useState(0);
   const randomNumber = getRandomNumber();
   const { pokemon, loading, error } = useGetPokemonDetail(
-    `https://pokeapi.co/api/v2/pokemon/${randomNumber}`
+    `https://pokeapi.co/api/v2/pokemon/${randomNumber}`,
+    key
   );
-  const { img } = useGetRandomPokemonImg();
+  const { img } = useGetRandomPokemonImg(key);
   const [selectedValue, setSelectedValue] = useState("");
 
   if (loading) {
@@ -19,26 +21,28 @@ function MultipleChoiceQuestion() {
     return <p>Error: {error.message}</p>;
   }
 
-  const handleOptionChange = (e) => {
+  const handleOptionChange = (e: any) => {
     setSelectedValue(e.target.value);
   };
 
   const checkAnswer = () => {
     if (selectedValue === pokemon?.sprites.front_default) {
       toast.success("Correct Answer!");
+      setKey(key + 1);
     } else {
       toast.error("Wrong Answer!");
+      setKey(key + 1);
     }
   };
 
   const options = [
     {
       value: img,
-      label: "Option A",
+      label: "",
     },
     {
       value: pokemon?.sprites.front_default,
-      label: "Option B",
+      label: "",
     },
   ];
 
@@ -51,7 +55,7 @@ function MultipleChoiceQuestion() {
         <div className="space-y-4">
           {options.map((option) => {
             return (
-              <>
+              <div key={option.value}>
                 <label className="flex items-center space-x-2 cursor-pointer">
                   <input
                     name="pokemon-choice"
@@ -67,7 +71,7 @@ function MultipleChoiceQuestion() {
                   />
                   {option.label}
                 </label>
-              </>
+              </div>
             );
           })}
         </div>
@@ -82,29 +86,10 @@ function MultipleChoiceQuestion() {
     </div>
   );
 }
-
-function FillInTheBlanksQuestion() {
-  return (
-    <div className="bg-white rounded-lg p-4 shadow-md">
-      <p className="text-lg font-semibold mb-4">Fill in the Blanks Question</p>
-      <p className="mb-4">
-        Complete the sentence: "React is a _____ library for building user
-        interfaces."
-      </p>
-      <input
-        type="text"
-        className="border border-gray-400 rounded-md p-2 w-full"
-        placeholder="Your answer"
-      />
-    </div>
-  );
-}
-
 function Quiz() {
   return (
     <div className="container mx-auto p-4 space-y-4">
       <MultipleChoiceQuestion />
-      <FillInTheBlanksQuestion />
     </div>
   );
 }

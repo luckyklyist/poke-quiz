@@ -18,7 +18,7 @@ interface PokemonDetail {
     };
   };
 }
-function useGetPokemonDetail(url: string) {
+function useGetPokemonDetail(url: string, key: number) {
   const [pokemon, setPokemon] = useState<PokemonDetail>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
@@ -41,7 +41,7 @@ function useGetPokemonDetail(url: string) {
     };
 
     fetchData();
-  }, []);
+  }, [key]);
 
   return { pokemon, loading, error };
 }

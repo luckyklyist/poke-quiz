@@ -25,7 +25,7 @@ const PokeDetail = () => {
   const [pokemon, setPokemon] = React.useState<PokemonDetail>();
   React.useEffect(() => {
     const getPokemon = () => {
-      fetch(`https://pokeapi.co/api/v2/pokemon/${params.id}`)
+      fetch(`https://pokeapi.co/api/v2/pokemon/${params.name}`)
         .then((res) => res.json())
         .then((res) => setPokemon(res));
     };
