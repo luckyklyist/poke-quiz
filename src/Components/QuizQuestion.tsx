@@ -2,6 +2,7 @@ import { useState } from "react";
 import useGetPokemonDetail from "../Hooks/useGetPokemonDetail";
 import useGetRandomPokemonImg from "../Hooks/useGetRandomPokemonImg";
 import getRandomNumber from "../getRandomNumber";
+import { toast } from "react-toastify";
 
 function MultipleChoiceQuestion() {
   const randomNumber = getRandomNumber();
@@ -24,9 +25,9 @@ function MultipleChoiceQuestion() {
 
   const checkAnswer = () => {
     if (selectedValue === pokemon?.sprites.front_default) {
-      alert("Correct!");
+      toast.success("Correct Answer!");
     } else {
-      alert("Wrong!");
+      toast.error("Wrong Answer!");
     }
   };
 
