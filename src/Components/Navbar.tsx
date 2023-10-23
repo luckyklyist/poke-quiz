@@ -13,6 +13,7 @@ const Navbar = () => {
     { text: "quiz", path: "/quiz" },
     { text: "Pokemon", path: "/pokemon" },
     { text: "Login", path: "/login" },
+    { text: "Profile", path: "/profile" },
   ];
 
   return (
