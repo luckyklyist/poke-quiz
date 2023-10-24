@@ -25,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="*" element={<div>Not Found</div>} />
     </Route>
   )
 );
