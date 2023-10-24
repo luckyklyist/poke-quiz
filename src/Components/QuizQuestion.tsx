@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 function MultipleChoiceQuestion() {
   const [key, setKey] = useState(0);
   const randomNumber = getRandomNumber();
+  const [points, setPoints] = useState(0);
+  const [life, setLife] = useState(2);
   const { pokemon, loading, error } = useGetPokemonDetail(
     `https://pokeapi.co/api/v2/pokemon/${randomNumber}`,
     key
@@ -29,11 +31,36 @@ function MultipleChoiceQuestion() {
     if (selectedValue === pokemon?.sprites.front_default) {
       toast.success("Correct Answer!");
       setKey(key + 1);
+      setPoints(points + 1);
     } else {
       toast.error("Wrong Answer!");
       setKey(key + 1);
+      setPoints(points - 1);
+      setLife(life - 1);
     }
   };
+
+  function retry() {
+    setKey(0);
+    setPoints(0);
+    setLife(2);
+  }
+
+  function shuffleTwoElements(arr) {
+    if (arr.length !== 2) {
+      return arr;
+    }
+
+    const random = Math.random() < 0.5;
+
+    if (random) {
+      const temp = arr[0];
+      arr[0] = arr[1];
+      arr[1] = temp;
+    }
+
+    return arr;
+  }
 
   const options = [
     {
@@ -46,11 +73,33 @@ function MultipleChoiceQuestion() {
     },
   ];
 
+  shuffleTwoElements(options);
+
+  if (life === 0) {
+    return (
+      <div className="flex  flex-col items-center">
+        <img
+          src="https://img.freepik.com/free-vector/game-with-glitch-effect_225004-661.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1698019200&semt=ais"
+          alt=""
+          className="w-96 h-96 mx-auto mb-10"
+        />
+        <div
+          className="bg-blue-500 p-2 w-40 rounded-lg  text-white hover:scale-110 duration-300"
+          onClick={retry}
+        >
+          Retry
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="bg-white rounded-lg p-4 shadow-md">
+    <div className="bg-slate-300 rounded-lg p-4 shadow-md">
       <p className="text-lg font-semibold mb-4">
         Select the image of this Pokemon {pokemon?.name}
       </p>
+      <p className="text-lg font-semibold mb-4">Your Life: {life}</p>
+      <p className="text-lg font-semibold mb-4">Points: {points}</p>
       <form>
         <div className="space-y-4">
           {options.map((option) => {
