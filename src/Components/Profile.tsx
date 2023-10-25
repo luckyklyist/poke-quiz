@@ -17,7 +17,7 @@ interface UserProfile {
   phone: string;
   emailVerification: boolean;
   phoneVerification: boolean;
-  prefs: Record<string, any>; // An empty object with unknown properties
+  prefs: Record<string, any>;
   accessedAt: string;
 }
 
@@ -54,29 +54,28 @@ const Profile = () => {
     <div className="bg-gray-100 p-6 max-w-lg mx-auto rounded-md shadow-lg">
       {userProfileExist ? (
         <>
-          <div className="text-center">
-            <img
-              src={user?.$id}
-              alt="Avatar"
-              className="w-32 h-32 mx-auto rounded-full object-cover"
-            />
-            <h1 className="text-2xl font-semibold mt-4">
-              {user?.email} Created At: {user?.$createdAt}
+          <div className="text-center my-8">
+            <h1 className="text-xl font-semibold">
+              User email: {user?.email}
+              <span className="text-gray-600 ml-2">
+                Created At: {user?.$createdAt}
+              </span>
             </h1>
           </div>
 
-          <div className="text-center mt-4">
-            <p className="text-gray-600">Points</p>
+          <div className="text-center my-4">
+            <div className="text-gray-600">Points</div>
             <p className="text-3xl font-semibold text-indigo-500">500</p>
           </div>
 
-          <div>
-            <Logout />
+          <div className="text-center my-4">
+            <button className="btn-primary" onClick={createAccount}>
+              Create Account
+            </button>
           </div>
 
-          <div>
-            <p>create accounts</p>
-            <button onClick={createAccount}>Create</button>
+          <div className="text-center my-4">
+            <Logout />
           </div>
         </>
       ) : (
