@@ -1,6 +1,13 @@
 import { Client, Databases, ID, Query } from "appwrite";
 import config from "../Config/config";
 
+export interface userPortfoloio {
+  userId: string;
+  name: string;
+  points: number;
+  country: string;
+}
+
 export class Services {
   client = new Client();
   databases;
@@ -33,32 +40,32 @@ export class Services {
     }
   }
 
-  async createPortfolio(name: string, points: number) {
+  async createPortfolio(userBody: userPortfoloio) {
     try {
-      return this.databases.createDocument(
+      return await this.databases.createDocument(
         config.databaseId,
         config.collectionId,
         ID.unique(),
-        {
-          name,
-          points,
-        }
+        userBody
       );
     } catch (err) {
       throw err;
     }
   }
 
-  async updatePortfolio(id: string, name: string, points: number) {
+  async updatePortfolio({
+    id,
+    userBody,
+  }: {
+    id: string;
+    userBody: userPortfoloio;
+  }) {
     try {
       return this.databases.updateDocument(
         config.databaseId,
         config.collectionId,
         id,
-        {
-          name,
-          points,
-        }
+        userBody
       );
     } catch (err) {
       throw err;
