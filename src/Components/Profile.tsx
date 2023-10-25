@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import authService from "../appwrite/auth";
+import Logout from "./Logout";
 
 interface UserProfile {
   $id: string;
@@ -51,6 +52,10 @@ const Profile = () => {
       <div className="text-center mt-4">
         <p className="text-gray-600">Points</p>
         <p className="text-3xl font-semibold text-indigo-500">500</p>
+      </div>
+
+      <div className="">
+        <Logout />
       </div>
     </div>
   );
