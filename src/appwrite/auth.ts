@@ -1,5 +1,6 @@
-import { Client, Account, ID } from "appwrite";
+import { Client, Account } from "appwrite";
 import config from "../Config/config";
+import service from "./appwriteConfig";
 
 export class AuthService {
   client = new Client();
@@ -20,7 +21,7 @@ export class AuthService {
 
   async googleLogin() {
     try {
-      return this.account.createOAuth2Session(
+      this.account.createOAuth2Session(
         "google",
         "http://localhost:5173",
         "http://localhost:5173/login"
@@ -46,13 +47,13 @@ export class AuthService {
     }
   }
 
-  async updateAccount(name: string, email: string) {
-    try {
-      return this.account.up;
-    } catch (err) {
-      throw err;
-    }
-  }
+  // async updateAccount(name: string, email: string) {
+  //   try {
+  //     return this.account.up;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
   // async updatePoints(points: number) {
   //   try {

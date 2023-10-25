@@ -12,7 +12,6 @@ function App() {
   const [pokemon, setPokemon] = useState<Pokemon[]>();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>();
-  const [nextPage, setNextPage] = useState<string | null>();
 
   useEffect(() => {
     const getPokemon = () => {
@@ -21,7 +20,6 @@ function App() {
         .then((res) => {
           setPokemon(res.results);
           setFilteredPokemon(res.results);
-          setNextPage(res.next);
         });
     };
     getPokemon();
@@ -41,7 +39,7 @@ function App() {
         Pokemon
       </h1>
       <img
-        src="https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c319.png"
+        src="https://purepng.com/public/uploads/large/purepng.com-pokemonpokemonpocket-monsterspokemon-franchisefictional-speciesone-pokemonmany-pokemonone-pikachu-1701527785496n5wbg.png"
         alt=""
         className="mx-auto rounded-lg mb-4 h-80"
       />

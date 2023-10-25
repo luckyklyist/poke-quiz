@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import authService from "../appwrite/auth";
 import Logout from "./Logout";
+import service from "../appwrite/appwriteConfig";
+import CreateProfilePage from "./CreateProifle";
 
 interface UserProfile {
   $id: string;
@@ -20,13 +22,16 @@ interface UserProfile {
 }
 
 const Profile = () => {
+  const [userProfileExist, setUserProfileExist] = React.useState(false);
   const [user, setUser] = React.useState<UserProfile>();
   useEffect(() => {
     const getUserProfile = async () => {
-      const profile = await authService.getUserSession();
-      console.log(profile);
+      const profile: UserProfile = await authService.getUserSession();
+      const userProfileExist = await service.userProfileExists(profile.email);
+      setUserProfileExist(userProfileExist);
       setUser(profile);
     };
+
     getUserProfile();
 
     const getSessions = async () => {
@@ -36,27 +41,49 @@ const Profile = () => {
 
     getSessions();
   }, []);
+
+  const createAccount = async () => {
+    await service.createPortfolio({
+      userId: "df",
+      name: "df",
+      country: "Nepal",
+      points: 5,
+    });
+  };
   return (
     <div className="bg-gray-100 p-6 max-w-lg mx-auto rounded-md shadow-lg">
-      <div className="text-center">
-        <img
-          src={user?.$id}
-          alt="Avatar"
-          className="w-32 h-32 mx-auto rounded-full object-cover"
-        />
-        <h1 className="text-2xl font-semibold mt-4">
-          {user?.email} Created At :{user?.$createdAt}
-        </h1>
-      </div>
+      {userProfileExist ? (
+        <>
+          <div className="text-center">
+            <img
+              src={user?.$id}
+              alt="Avatar"
+              className="w-32 h-32 mx-auto rounded-full object-cover"
+            />
+            <h1 className="text-2xl font-semibold mt-4">
+              {user?.email} Created At: {user?.$createdAt}
+            </h1>
+          </div>
 
-      <div className="text-center mt-4">
-        <p className="text-gray-600">Points</p>
-        <p className="text-3xl font-semibold text-indigo-500">500</p>
-      </div>
+          <div className="text-center mt-4">
+            <p className="text-gray-600">Points</p>
+            <p className="text-3xl font-semibold text-indigo-500">500</p>
+          </div>
 
-      <div className="">
-        <Logout />
-      </div>
+          <div>
+            <Logout />
+          </div>
+
+          <div>
+            <p>create accounts</p>
+            <button onClick={createAccount}>Create</button>
+          </div>
+        </>
+      ) : (
+        <div>
+          <CreateProfilePage />
+        </div>
+      )}
     </div>
   );
 };

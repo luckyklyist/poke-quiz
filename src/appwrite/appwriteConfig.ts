@@ -40,6 +40,19 @@ export class Services {
     }
   }
 
+  async userProfileExists(userId: string) {
+    try {
+      const exist = await this.databases.listDocuments(
+        config.databaseId,
+        config.collectionId,
+        [Query.equal("userId", userId)]
+      );
+      return exist.documents.length > 0;
+    } catch (err) {
+      throw err;
+    }
+  }
+
   async createPortfolio(userBody: userPortfoloio) {
     try {
       return await this.databases.createDocument(

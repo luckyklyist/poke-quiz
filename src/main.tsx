@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./Components/Navbar.tsx";
 import SignIn from "./page/SignIn.tsx";
 import ProfilePage from "./page/Profile.tsx";
+import CreateProfilePage from "./Components/CreateProifle.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
       <Route path="/quiz" element={<Quiz />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/createProfile" element={<CreateProfilePage />} />
       <Route path="*" element={<div>Not Found</div>} />
     </Route>
   )
