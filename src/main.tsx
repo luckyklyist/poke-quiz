@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -17,6 +17,11 @@ import Navbar from "./Components/Navbar.tsx";
 import SignIn from "./page/SignIn.tsx";
 import ProfilePage from "./page/Profile.tsx";
 import CreateProfilePage from "./Components/CreateProifle.tsx";
+import authService from "./appwrite/auth.ts";
+import { useDispatch } from "react-redux";
+import { login } from "./features/authSlice.ts";
+import { Provider } from "react-redux";
+import { store } from "./store/store.ts";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,11 +39,24 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 
 function Root() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    async function isAuthenticated() {
+      const resp = await authService.getUserSession();
+      if (!resp) {
+      } else {
+        dispatch(login({ isLoggedIn: true, email: resp.email }));
+      }
+    }
+    isAuthenticated();
+  }, []);
   return (
     <>
       <Navbar />

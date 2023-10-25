@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const loginStatus = useSelector((state: RootState) => state.auth.isLoggedIn);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -12,8 +14,8 @@ const Navbar = () => {
     { text: "Home", path: "/" },
     { text: "quiz", path: "/quiz" },
     { text: "Pokemon", path: "/pokemon" },
-    { text: "Login", path: "/login" },
-    { text: "Profile", path: "/profile" },
+    // { text: "Login", path: "/login" },
+    // { text: "Profile", path: "/profile" },
   ];
 
   return (
@@ -91,6 +93,17 @@ const Navbar = () => {
             ))}
           </ul>
         </div>
+      </div>
+      <div>
+        {loginStatus ? (
+          <Link to="/profile" className="text-black hover:text-gray-300">
+            Profile
+          </Link>
+        ) : (
+          <Link to="/login" className="text-white hover:text-gray-300">
+            Login
+          </Link>
+        )}
       </div>
     </nav>
   );
