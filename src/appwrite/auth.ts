@@ -37,6 +37,30 @@ export class AuthService {
       throw err;
     }
   }
+
+  async logout() {
+    try {
+      return this.account.deleteSession("current");
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async updateAccount(name: string, email: string) {
+    try {
+      return this.account.up;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // async updatePoints(points: number) {
+  //   try {
+  //     return this.account.updatePrefs();
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 }
 
 const authService = new AuthService();
