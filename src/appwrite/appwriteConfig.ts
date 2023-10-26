@@ -1,4 +1,4 @@
-import { Client, Databases, ID, Query } from "appwrite";
+import { Client, Databases, ID, Query, Models } from "appwrite";
 import config from "../Config/config";
 
 export interface userPortfoloio {
@@ -7,6 +7,12 @@ export interface userPortfoloio {
   points: number;
   country: string;
 }
+
+export type LeaderBoard = {
+  name: string;
+  points: number;
+  country: string;
+} & Models.Document;
 
 export interface userPortfoloioUpdate {
   name?: string;
@@ -149,6 +155,18 @@ export class Services {
         config.databaseId,
         config.collectionId,
         id
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getLeaderBoard() {
+    try {
+      return this.databases.listDocuments<LeaderBoard>(
+        config.databaseId,
+        config.collectionId,
+        [Query.orderDesc("points")]
       );
     } catch (err) {
       throw err;

@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./features/authSlice.ts";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
+import LeaderboardTable from "./Components/LeaderBoardTable.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<App />} />
       <Route path="/pokemon/:name" element={<PokeDetail />} />
       <Route path="/quiz" element={<Quiz />} />
+      <Route path="/leaderboard" element={<LeaderboardTable />} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/profile" element={<ProfilePage />} />
       <Route path="/createProfile" element={<CreateProfilePage />} />
