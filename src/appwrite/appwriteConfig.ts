@@ -8,6 +8,12 @@ export interface userPortfoloio {
   country: string;
 }
 
+export interface userPortfoloioUpdate {
+  name?: string;
+  points?: number;
+  country?: string;
+}
+
 export class Services {
   client = new Client();
   databases;
@@ -35,6 +41,27 @@ export class Services {
         config.collectionId,
         id
       );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getPortfolioByUserId(userId: string) {
+    try {
+      const exist = await this.databases.listDocuments(
+        config.databaseId,
+        config.collectionId,
+        [Query.equal("userId", userId)]
+      );
+      if (exist.documents.length > 0) {
+        return this.databases.getDocument(
+          config.databaseId,
+          config.collectionId,
+          exist.documents[0].$id
+        );
+      } else {
+        throw new Error("User not found");
+      }
     } catch (err) {
       throw err;
     }
@@ -71,7 +98,7 @@ export class Services {
     userBody,
   }: {
     id: string;
-    userBody: userPortfoloio;
+    userBody: userPortfoloioUpdate;
   }) {
     try {
       return this.databases.updateDocument(
@@ -80,6 +107,37 @@ export class Services {
         id,
         userBody
       );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // update document using userId
+
+  async updatePortfolioByUserId({
+    userId,
+    userBody,
+  }: {
+    userId: string;
+    userBody: userPortfoloioUpdate;
+  }) {
+    try {
+      const exist = await this.databases.listDocuments(
+        config.databaseId,
+        config.collectionId,
+        [Query.equal("userId", userId)]
+      );
+      if (exist.documents.length > 0) {
+        const id = exist.documents[0].$id;
+        return this.databases.updateDocument(
+          config.databaseId,
+          config.collectionId,
+          id,
+          userBody
+        );
+      } else {
+        throw new Error("User not found");
+      }
     } catch (err) {
       throw err;
     }

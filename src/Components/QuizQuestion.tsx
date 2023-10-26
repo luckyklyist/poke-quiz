@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useGetPokemonDetail from "../Hooks/useGetPokemonDetail";
 import useGetRandomPokemonImg from "../Hooks/useGetRandomPokemonImg";
 import getRandomNumber from "../getRandomNumber";
 import { toast } from "react-toastify";
+import useLocalStorage from "../Hooks/useLocalStorage";
+import service from "../appwrite/appwriteConfig";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
 function MultipleChoiceQuestion() {
   const [key, setKey] = useState(0);
   const randomNumber = getRandomNumber();
-  const [points, setPoints] = useState(0);
+  const [points, setPoints] = useLocalStorage("points", 0);
   const [life, setLife] = useState(2);
   const { pokemon, loading, error } = useGetPokemonDetail(
     `https://pokeapi.co/api/v2/pokemon/${randomNumber}`,
@@ -15,6 +19,22 @@ function MultipleChoiceQuestion() {
   );
   const { img } = useGetRandomPokemonImg(key);
   const [selectedValue, setSelectedValue] = useState("");
+  const userEmail = useSelector((state: RootState) => state.auth.email);
+
+  useEffect(() => {
+    if (life === 0) {
+      // Save the user Points
+      const updatePoints = async () => {
+        await service
+          .updatePortfolioByUserId({
+            userId: userEmail,
+            userBody: { points: points },
+          })
+          .then(() => console.log("Points Updated"));
+      };
+      updatePoints();
+    }
+  }, [life]);
 
   if (loading) {
     return <p>Loading...</p>;
