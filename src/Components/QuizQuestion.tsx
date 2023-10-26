@@ -29,6 +29,7 @@ function MultipleChoiceQuestion() {
   useEffect(() => {
     if (life === 0) {
       // Save the user Points
+      setPoints(0);
       const updatePoints = async () => {
         await service
           .updatePortfolioByUserId({
@@ -67,7 +68,6 @@ function MultipleChoiceQuestion() {
 
   function retry() {
     setKey(0);
-    setPoints(0);
     setLife(2);
   }
 
