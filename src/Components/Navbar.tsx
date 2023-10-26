@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems = [
     { text: "Home", path: "/", active: true },
     { text: "quiz", path: "/quiz", active: true },
-    { text: "Pokemon", path: "/pokemon", active: true },
+    { text: "LeaderBoard", path: "/leaderboard", active: true },
     { text: "Login", path: "/login", active: !loginStatus },
     { text: "Profile", path: "/profile", active: loginStatus },
   ];

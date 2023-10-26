@@ -86,6 +86,10 @@ const Profile = () => {
                 {user?.$createdAt}
               </div>
               <div className="text-gray-600 mb-2">
+                <span className="text-xl font-semibold">Points:</span>{" "}
+                {user?.points}
+              </div>
+              <div className="text-gray-600 mb-2">
                 <span className="text-xl font-semibold">Email:</span>{" "}
                 {user?.userId}
               </div>
