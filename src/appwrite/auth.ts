@@ -1,6 +1,5 @@
 import { Client, Account } from "appwrite";
 import config from "../Config/config";
-import service from "./appwriteConfig";
 
 export class AuthService {
   client = new Client();

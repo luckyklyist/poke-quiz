@@ -8,6 +8,11 @@ import service from "../appwrite/appwriteConfig";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
+interface Option {
+  value: string | undefined;
+  label: string;
+}
+
 function MultipleChoiceQuestion() {
   const [key, setKey] = useState(0);
   const randomNumber = getRandomNumber();
@@ -66,7 +71,7 @@ function MultipleChoiceQuestion() {
     setLife(2);
   }
 
-  function shuffleTwoElements(arr) {
+  function shuffleTwoElements(arr: Option[]) {
     if (arr.length !== 2) {
       return arr;
     }
@@ -82,7 +87,7 @@ function MultipleChoiceQuestion() {
     return arr;
   }
 
-  const options = [
+  const options: Option[] = [
     {
       value: img,
       label: "",

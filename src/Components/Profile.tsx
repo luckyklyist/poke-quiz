@@ -59,6 +59,7 @@ const Profile = () => {
     const getUserInfo = async () => {
       const userInfo = await service.getPortfolioByUserId(email);
       console.log(userInfo, "this is user info");
+      // @ts-ignore
       setUser(userInfo);
     };
     getUserInfo();

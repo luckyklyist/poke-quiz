@@ -21,7 +21,7 @@ interface PokemonDetail {
 }
 
 const PokeDetail = () => {
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ name: string }>();
   const [pokemon, setPokemon] = React.useState<PokemonDetail>();
   React.useEffect(() => {
     const getPokemon = () => {
@@ -33,7 +33,7 @@ const PokeDetail = () => {
   }, []);
   return (
     <div className="p-4 mx-auto max-w-md bg-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold mb-4">Poke ID: {params.id}</h1>
+      <h1 className="text-3xl font-bold mb-4">Poke ID: {params.name}</h1>
       <div className="grid grid-cols-2 gap-4 mb-4">
         <div className="text-center">
           <h2 className="text-xl font-semibold">Poke Name</h2>

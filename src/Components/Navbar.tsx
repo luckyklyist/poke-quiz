@@ -11,15 +11,15 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { text: "Home", path: "/" },
-    { text: "quiz", path: "/quiz" },
-    { text: "Pokemon", path: "/pokemon" },
-    // { text: "Login", path: "/login" },
-    // { text: "Profile", path: "/profile" },
+    { text: "Home", path: "/", active: true },
+    { text: "quiz", path: "/quiz", active: true },
+    { text: "Pokemon", path: "/pokemon", active: true },
+    { text: "Login", path: "/login", active: !loginStatus },
+    { text: "Profile", path: "/profile", active: loginStatus },
   ];
 
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className="bg-black p-4">
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         <Link to="/" className="text-white font-bold text-xl">
           Pokeee
@@ -82,28 +82,23 @@ const Navbar = () => {
           </button>
         </div>
 
-        <div className={`lg:flex ${isOpen ? "block" : "hidden"}`}>
+        <div className={`lg:flex ${isOpen ? "block" : "hidden"} mt-4 lg:mt-0`}>
           <ul className="lg:flex space-x-4">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <Link to={item.path} className="text-white hover:text-gray-300">
-                  {item.text}
-                </Link>
-              </li>
-            ))}
+            {navItems.map(
+              (item, index) =>
+                item.active && (
+                  <li key={index}>
+                    <Link
+                      to={item.path}
+                      className="text-white hover:text-gray-300"
+                    >
+                      {item.text}
+                    </Link>
+                  </li>
+                )
+            )}
           </ul>
         </div>
-      </div>
-      <div>
-        {loginStatus ? (
-          <Link to="/profile" className="text-black hover:text-gray-300">
-            Profile
-          </Link>
-        ) : (
-          <Link to="/login" className="text-white hover:text-gray-300">
-            Login
-          </Link>
-        )}
       </div>
     </nav>
   );
