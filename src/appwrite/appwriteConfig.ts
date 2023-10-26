@@ -118,8 +118,6 @@ export class Services {
     }
   }
 
-  // update document using userId
-
   async updatePortfolioByUserId({
     userId,
     userBody,

@@ -48,7 +48,7 @@ function App() {
           <div className="relative flex-grow mr-4">
             <input
               type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-black h-12"
+              className="w-full p-3 border border-gray-400 rounded-lg mb-4 focus:outline-none focus:ring-[.5px] focus:ring-gray-500 h-12"
               placeholder="Enter a Pokemon name"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}

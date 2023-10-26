@@ -22,8 +22,8 @@ export class AuthService {
     try {
       this.account.createOAuth2Session(
         "google",
-        "http://localhost:5173",
-        "http://localhost:5173/login"
+        config.sucessRedirectOauthUrl,
+        config.failureRedirectOauthUrl
       );
     } catch (err) {
       throw err;
