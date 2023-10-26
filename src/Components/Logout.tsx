@@ -6,7 +6,7 @@ const Logout = () => {
   const dispatch = useDispatch();
   return (
     <button
-      className="bg-red-400 p-2 w-52 rounded-lg"
+      className="bg-black text-white hover:scale-110 duration-300  p-2 w-52 rounded-lg"
       onClick={() => {
         authService.logout();
         dispatch(logout());

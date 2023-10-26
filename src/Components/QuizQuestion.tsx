@@ -119,18 +119,20 @@ function MultipleChoiceQuestion() {
   }
 
   return (
-    <div className="bg-slate-300 rounded-lg p-4 shadow-md">
-      <p className="text-lg font-semibold mb-4">
-        Select the image of this Pokemon {pokemon?.name}
+    <div className="bg-gray-100  p-4 shadow-md">
+      <p className="text-lg font-semibold mb-4 text-black">
+        Which image belongs to this pokemon {pokemon?.name} ?
       </p>
-      <p className="text-lg font-semibold mb-4">Your Life: {life}</p>
-      <p className="text-lg font-semibold mb-4">Points: {points}</p>
+      <div className="flex space-x-4 mb-4">
+        <p className="text-lg font-semibold text-black">Your Life: {life}</p>
+        <p className="text-lg font-semibold text-black">Points: {points}</p>
+      </div>
       <form>
         <div className="space-y-4">
           {options.map((option) => {
             return (
               <div key={option.value}>
-                <label className="flex items-center space-x-2 cursor-pointer">
+                <label className="flex items-center space-x-2 cursor-pointer text-white">
                   <input
                     name="pokemon-choice"
                     className="form-radio"
@@ -141,9 +143,9 @@ function MultipleChoiceQuestion() {
                   <img
                     src={option.value}
                     alt={`Option B`}
-                    className="w-20 h-40"
+                    className="w-20 h-40 rounded-lg shadow-md hover:scale-110 duration-300"
                   />
-                  {option.label}
+                  <span>{option.label}</span>
                 </label>
               </div>
             );
@@ -151,7 +153,7 @@ function MultipleChoiceQuestion() {
         </div>
         <button
           type="button"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
+          className="bg-black text-white px-4 py-2 rounded-md mt-4 hover:scale-110 transition duration-300"
           onClick={checkAnswer}
         >
           Submit
@@ -162,7 +164,7 @@ function MultipleChoiceQuestion() {
 }
 function Quiz() {
   return (
-    <div className="container mx-auto p-4 space-y-4">
+    <div className="container mx-auto space-y-4">
       <MultipleChoiceQuestion />
     </div>
   );

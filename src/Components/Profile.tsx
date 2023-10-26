@@ -40,11 +40,13 @@ const Profile = () => {
   const [userProfileExist, setUserProfileExist] = React.useState(false);
   const [user, setUser] = React.useState<userInfo>();
   const email = useSelector((state: RootState) => state.auth.email);
+  const [loader, setLoader] = React.useState(true);
   useEffect(() => {
     const getUserProfile = async () => {
       const profile: UserProfile = await authService.getUserSession();
       const userProfileExist = await service.userProfileExists(profile.email);
       setUserProfileExist(userProfileExist);
+      setLoader(false);
     };
 
     getUserProfile();
@@ -65,39 +67,39 @@ const Profile = () => {
     getUserInfo();
   }, [email]);
 
-  const createAccount = async () => {
-    await service.createPortfolio({
-      userId: "df",
-      name: "df",
-      country: "Nepal",
-      points: 5,
-    });
-  };
+  if (loader) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="bg-gray-100 p-6 max-w-lg mx-auto rounded-md shadow-lg">
+    <div className="bg-gray-100 p-6 shadow-md h-full">
       {userProfileExist ? (
         <>
-          <div className="text-center my-8">
-            <h1 className="text-xl font-semibold">
-              Name: {user?.name}
-              <span className="text-gray-600 ml-2">
-                Created At: {user?.$createdAt}
-              </span>
-              <span className="text-gray-600 ml-2">email: {user?.userId}</span>
-            </h1>
-          </div>
+          <div className="flex flex-col justify-center items-center md:flex-row md:items-start my-12">
+            <div className="text-center md:text-left">
+              <div className="text-gray-600 mb-2">
+                <span className="text-xl font-semibold">Name:</span>{" "}
+                {user?.name}
+              </div>
+              <div className="text-gray-600 mb-2">
+                <span className="text-xl font-semibold">Created At:</span>{" "}
+                {user?.$createdAt}
+              </div>
+              <div className="text-gray-600 mb-2">
+                <span className="text-xl font-semibold">Email:</span>{" "}
+                {user?.userId}
+              </div>
+            </div>
 
-          <div className="text-center my-4">
-            <div className="text-gray-600">Points</div>
-            <p className="text-3xl font-semibold text-indigo-500">
-              {user?.points}
-            </p>
-          </div>
-
-          <div className="text-center my-4">
-            <button className="btn-primary" onClick={createAccount}>
-              Create Account
-            </button>
+            <div className="md:ml-4">
+              <div className="text-center my-4">
+                <img
+                  src="https://i.pinimg.com/1200x/83/1d/22/831d2202cf59cc795da3ca0109735171.jpg"
+                  alt="Profile Picture"
+                  className="w-20 h-20 rounded-full object-cover mx-auto"
+                />
+              </div>
+            </div>
           </div>
 
           <div className="text-center my-4">
