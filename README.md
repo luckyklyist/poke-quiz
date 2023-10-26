@@ -2,6 +2,8 @@
 
 Welcome to the Pokeee Quiz Game! This project was created purely for fun and enjoyment . I crafted it for my brother to play, who watches Pokemon a lot. Frankly, I only know the name of Pikachu, but I'm electrified to have you here! 😅⚡
 
+<img width="1411" alt="Screenshot 2023-10-26 at 9 14 28 PM" src="https://github.com/luckyklyist/poke-quiz/assets/35479077/f418d0fd-3dc0-4480-8929-3e92d791e03f">
+
 ## Tech Stack
 
 The web quiz game is built using web technologies:
