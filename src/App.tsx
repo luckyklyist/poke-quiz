@@ -33,33 +33,33 @@ function App() {
   };
 
   return (
-    <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+    <div className="bg-gray-100 p-4 shadow-xl border-2 border-gray-500">
       <h1 className="text-3xl font-bold mb-4 text-center hover:scale-110 duration-300">
         Pokemon
       </h1>
       <img
         src="https://purepng.com/public/uploads/large/purepng.com-pokemonpokemonpocket-monsterspokemon-franchisefictional-speciesone-pokemonmany-pokemonone-pikachu-1701527785496n5wbg.png"
         alt=""
-        className="mx-auto rounded-lg mb-4 h-80"
+        className="mx-auto rounded-lg mb-4 h-80 border border-gray-400 p-4"
       />
       <div className="flex flex-col items-center">
         <h2 className="text-xl my-2">Search Pokemon</h2>
-        <div className="w-full max-w-md my-4">
-          <div className="relative">
+        <div className="w-full max-w-md my-4 flex">
+          <div className="relative flex-grow mr-4">
             <input
               type="text"
-              className="w-full p-3 border border-gray-400 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border border-gray-400 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-black h-12"
               placeholder="Enter a Pokemon name"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <button
-              className="w-full bg-blue-500 p-3 text-white rounded-lg hover:bg-blue-600 transition duration-300"
-              onClick={handleSearch}
-            >
-              Search
-            </button>
           </div>
+          <button
+            className="w-32 h-12 bg-black p-3 text-white rounded-lg hover:scale-110 transition duration-300"
+            onClick={handleSearch}
+          >
+            Search
+          </button>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -67,7 +67,7 @@ function App() {
           <Link
             to={`/pokemon/${poke.name}`}
             key={poke.name}
-            className="p-3 bg-white rounded-lg hover:bg-blue-100 transition duration-300 transform hover:scale-105 text-center"
+            className="p-3 bg-white rounded-lg hover:bg-gray-200 transition duration-300 transform hover:scale-105 text-center border border-gray-300"
           >
             {poke.name}
           </Link>
